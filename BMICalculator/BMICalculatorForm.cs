@@ -41,8 +41,7 @@ namespace BMICalculator
             InitializeComponent();
         }
 
-        private void ResetButton_Click(object sender, 
-            EventArgs e)
+        private void ResetButton_Click(object sender, EventArgs e)
         {
             this.ImperialRadioButton.Checked = false;
             this.MetricRadioButton.Checked = false;
@@ -60,10 +59,30 @@ namespace BMICalculator
             this.BMIResultsProgressBar.Maximum = 100;
             this.BMIResultsProgressBar.BackColor = ProgressBar.DefaultBackColor;
 
-            MessageBox.Show("Values and Buttons have been reset.",
+            MessageBox.Show("Form has been reset.",
                 "BMI Calculator", 
                 MessageBoxButtons.OK, 
                 MessageBoxIcon.Information);
+        }
+
+        private void CalculateBMIButton_Click(object sender, EventArgs e)
+        {
+            this.CalculateBMIButton.Enabled = false;
+            this.ResetButton.Enabled = true;
+        }
+
+        private void ImperialRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            this.ImperialRadioButton.Enabled = false;
+            this.MetricRadioButton.Enabled = true;
+            this.MetricRadioButton.Checked = false;
+        }
+
+        private void MetricRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            this.MetricRadioButton.Enabled = false;
+            this.ImperialRadioButton.Enabled = true;
+            this.ImperialRadioButton.Checked = false;
         }
     }
 }

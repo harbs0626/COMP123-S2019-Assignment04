@@ -85,6 +85,7 @@
             this.ImperialRadioButton.TabStop = true;
             this.ImperialRadioButton.Text = "Imperial";
             this.ImperialRadioButton.UseVisualStyleBackColor = true;
+            this.ImperialRadioButton.CheckedChanged += new System.EventHandler(this.ImperialRadioButton_CheckedChanged);
             // 
             // MetricRadioButton
             // 
@@ -99,6 +100,7 @@
             this.MetricRadioButton.TabStop = true;
             this.MetricRadioButton.Text = "Metric";
             this.MetricRadioButton.UseVisualStyleBackColor = true;
+            this.MetricRadioButton.CheckedChanged += new System.EventHandler(this.MetricRadioButton_CheckedChanged);
             // 
             // HeightLabel
             // 
@@ -113,6 +115,7 @@
             this.HeightLabel.Size = new System.Drawing.Size(134, 44);
             this.HeightLabel.TabIndex = 2;
             this.HeightLabel.Text = "My Height:";
+            this.HeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // HeightTextBox
             // 
@@ -150,6 +153,7 @@
             this.WeightLabel.Size = new System.Drawing.Size(134, 44);
             this.WeightLabel.TabIndex = 3;
             this.WeightLabel.Text = "My Weight:";
+            this.WeightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CalculateBMIButton
             // 
@@ -163,6 +167,7 @@
             this.CalculateBMIButton.TabIndex = 6;
             this.CalculateBMIButton.Text = "Calculate BMI";
             this.CalculateBMIButton.UseVisualStyleBackColor = true;
+            this.CalculateBMIButton.Click += new System.EventHandler(this.CalculateBMIButton_Click);
             // 
             // ResetButton
             // 
