@@ -71,18 +71,21 @@ namespace BMICalculator
             this.ResetButton.Enabled = true;
         }
 
-        private void ImperialRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void BMICalculatorForm_Load(object sender, EventArgs e)
         {
-            this.ImperialRadioButton.Enabled = false;
-            this.MetricRadioButton.Enabled = true;
-            this.MetricRadioButton.Checked = false;
+
         }
 
-        private void MetricRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void BMICalculatorMode_CheckedChange(object sender, EventArgs e)
         {
-            this.MetricRadioButton.Enabled = false;
-            this.ImperialRadioButton.Enabled = true;
-            this.ImperialRadioButton.Checked = false;
+            if (this.ImperialRadioButton.Checked)
+            {
+                this.MetricRadioButton.Checked = false;
+            }
+            else if (this.MetricRadioButton.Checked)
+            {
+                this.ImperialRadioButton.Checked = false;
+            }
         }
     }
 }
