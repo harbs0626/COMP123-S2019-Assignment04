@@ -40,5 +40,30 @@ namespace BMICalculator
         {
             InitializeComponent();
         }
+
+        private void ResetButton_Click(object sender, 
+            EventArgs e)
+        {
+            this.ImperialRadioButton.Checked = false;
+            this.MetricRadioButton.Checked = false;
+
+            this.HeightTextBox.Text = "0";
+            this.WeightTextBox.Text = "0";
+
+            this.CalculateBMIButton.Enabled = true;
+            this.ResetButton.Enabled = false;
+
+            this.BMITextBox.Text = "0";
+            this.BMIResultsTextBox.Text = "BMI Result";
+
+            this.BMIResultsProgressBar.Minimum = 1;
+            this.BMIResultsProgressBar.Maximum = 100;
+            this.BMIResultsProgressBar.BackColor = ProgressBar.DefaultBackColor;
+
+            MessageBox.Show("Values and Buttons have been reset.",
+                "BMI Calculator", 
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Information);
+        }
     }
 }
