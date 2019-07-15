@@ -32,9 +32,9 @@
             this.ImperialRadioButton = new System.Windows.Forms.RadioButton();
             this.MetricRadioButton = new System.Windows.Forms.RadioButton();
             this.HeightLabel = new System.Windows.Forms.Label();
-            this.WeightLabel = new System.Windows.Forms.Label();
             this.HeightTextBox = new System.Windows.Forms.TextBox();
             this.WeightTextBox = new System.Windows.Forms.TextBox();
+            this.WeightLabel = new System.Windows.Forms.Label();
             this.CalculateBMIButton = new System.Windows.Forms.Button();
             this.ResetButton = new System.Windows.Forms.Button();
             this.BMITextBox = new System.Windows.Forms.TextBox();
@@ -114,6 +114,30 @@
             this.HeightLabel.TabIndex = 2;
             this.HeightLabel.Text = "My Height:";
             // 
+            // HeightTextBox
+            // 
+            this.HeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.HeightTextBox.Location = new System.Drawing.Point(143, 44);
+            this.HeightTextBox.Name = "HeightTextBox";
+            this.HeightTextBox.Size = new System.Drawing.Size(134, 38);
+            this.HeightTextBox.TabIndex = 4;
+            this.HeightTextBox.Text = "0";
+            this.HeightTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // WeightTextBox
+            // 
+            this.WeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.WeightTextBox.Location = new System.Drawing.Point(143, 88);
+            this.WeightTextBox.Name = "WeightTextBox";
+            this.WeightTextBox.Size = new System.Drawing.Size(134, 38);
+            this.WeightTextBox.TabIndex = 5;
+            this.WeightTextBox.Text = "0";
+            this.WeightTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // WeightLabel
             // 
             this.WeightLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -126,26 +150,6 @@
             this.WeightLabel.Size = new System.Drawing.Size(134, 44);
             this.WeightLabel.TabIndex = 3;
             this.WeightLabel.Text = "My Weight:";
-            // 
-            // HeightTextBox
-            // 
-            this.HeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.HeightTextBox.Location = new System.Drawing.Point(143, 44);
-            this.HeightTextBox.Name = "HeightTextBox";
-            this.HeightTextBox.Size = new System.Drawing.Size(134, 38);
-            this.HeightTextBox.TabIndex = 4;
-            // 
-            // WeightTextBox
-            // 
-            this.WeightTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.WeightTextBox.Location = new System.Drawing.Point(143, 88);
-            this.WeightTextBox.Name = "WeightTextBox";
-            this.WeightTextBox.Size = new System.Drawing.Size(134, 38);
-            this.WeightTextBox.TabIndex = 5;
             // 
             // CalculateBMIButton
             // 
