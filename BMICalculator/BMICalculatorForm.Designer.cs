@@ -227,6 +227,7 @@
             this.BMIResultsProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.BMIResultsProgressBar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.BMICalculatorTableLayoutPanel.SetColumnSpan(this.BMIResultsProgressBar, 2);
             this.BMIResultsProgressBar.Location = new System.Drawing.Point(3, 339);
             this.BMIResultsProgressBar.Name = "BMIResultsProgressBar";

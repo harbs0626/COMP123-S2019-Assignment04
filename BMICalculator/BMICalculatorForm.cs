@@ -69,9 +69,10 @@ namespace BMICalculator
             this.BMITextBox.Text = "0";
             this.BMIResultsTextBox.Text = "BMI Result";
 
-            this.BMIResultsProgressBar.Minimum = 1;
+            this.BMIResultsProgressBar.Minimum = 0;
             this.BMIResultsProgressBar.Maximum = 100;
-            this.BMIResultsProgressBar.BackColor = ProgressBar.DefaultBackColor;
+            this.BMIResultsProgressBar.Value = 0;
+            this.BMIResultsProgressBar.BackColor = Color.WhiteSmoke;
         }
 
         private double _weightInPounds = 0.0;
@@ -91,7 +92,10 @@ namespace BMICalculator
 
                 double _result = 0.0;
                 _result = (_weightInPounds * 703.0) / (_heightInInches * _heightInInches);
-                this.BMITextBox.Text = _result.ToString();
+
+                this.BMIResultsScale(_result);
+
+                this.BMITextBox.Text = _result.ToString("F");
             }
             else if (this.MetricRadioButton.Checked)
             {
@@ -99,8 +103,46 @@ namespace BMICalculator
                 this._heightInMeters = double.Parse(this.HeightTextBox.Text);
 
                 double _result = 0.0;
-                _result = (_weightInKilograms) / (_heightInMeters * _heightInMeters);
-                this.BMITextBox.Text = _result.ToString();
+                _result = _weightInKilograms / (_heightInMeters * _heightInMeters);
+
+                this.BMIResultsScale(_result);
+
+                this.BMITextBox.Text = _result.ToString("F");
+            }
+        }
+
+        private void BMIResultsScale(double _result)
+        {
+            this.BMIResultsProgressBar.Minimum = 0;
+            this.BMIResultsProgressBar.Maximum = 100;
+
+            if (_result < 18.5)
+            {
+                this.BMIResultsTextBox.Text = "You are Underweight";
+                //yellow
+                this.BMIResultsProgressBar.BackColor = Color.Yellow;
+                this.BMIResultsProgressBar.Value = (int)_result;
+            }
+            else if ((_result >= 18.5) && (_result <= 24.9))
+            {
+                this.BMIResultsTextBox.Text = "You are Normal";
+                //green
+                this.BMIResultsProgressBar.BackColor = Color.Green;
+                this.BMIResultsProgressBar.Value = (int)_result;
+            }
+            else if ((_result >= 25) && (_result <= 29.9))
+            {
+                this.BMIResultsTextBox.Text = "You are Overweight";
+                //orange
+                this.BMIResultsProgressBar.BackColor = Color.Orange;
+                this.BMIResultsProgressBar.Value = (int)_result;
+            }
+            else if (_result >= 30)
+            {
+                this.BMIResultsTextBox.Text = "You are Obese";
+                //red
+                this.BMIResultsProgressBar.BackColor = Color.Red;
+                this.BMIResultsProgressBar.Value = (int)_result;
             }
         }
 
