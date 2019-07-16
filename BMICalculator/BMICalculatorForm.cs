@@ -193,5 +193,10 @@ namespace BMICalculator
                 }
             }
         }
+
+        private void BMICalculatorForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -16,5 +16,19 @@ namespace BMICalculator
         {
             InitializeComponent();
         }
+
+        private void SplashScreenTimer_Tick(object sender, EventArgs e)
+        {
+            this.SplashScreenTimer.Enabled = false;
+
+            Program.bmiCalculatorForm = new BMICalculatorForm();
+            Program.bmiCalculatorForm.Show();
+            this.Hide();
+        }
+
+        private void SplashScreenForm_Load(object sender, EventArgs e)
+        {
+            this.SplashScreenTimer.Enabled = true;
+        }
     }
 }
