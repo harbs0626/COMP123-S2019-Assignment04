@@ -8,8 +8,7 @@ namespace BMICalculator
 {
     static class Program
     {
-        public static BMICalculatorForm bmiCalculatorForm;
-        public static SplashScreenForm splashScreenForm;
+        public static Dictionary<string, Form> Forms;
 
         /// <summary>
         /// The main entry point for the application.
@@ -19,8 +18,12 @@ namespace BMICalculator
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            splashScreenForm = new SplashScreenForm();
-            Application.Run(splashScreenForm);
+
+            Forms = new Dictionary<string, Form>();
+            Forms.Add("BMICalculatorForm", new BMICalculatorForm());
+            Forms.Add("SplashScreenForm", new SplashScreenForm());
+
+            Application.Run(Forms[FormName.SplashScreenForm.ToString()]);
         }
     }
 }

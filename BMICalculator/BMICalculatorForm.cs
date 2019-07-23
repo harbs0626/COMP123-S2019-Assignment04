@@ -45,112 +45,139 @@ namespace BMICalculator
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            this.ImperialRadioButton.Checked = false;
-            this.MetricRadioButton.Checked = false;
-            this.CalculateBMIButton.Enabled = false;
-            this.ResetButton.Enabled = false;
-
-            this.ClearForm();
-
-            MessageBox.Show("Form has been reset.",
-                "BMI Calculator", 
-                MessageBoxButtons.OK, 
-                MessageBoxIcon.Information);
+            this.ResetForm();
         }
 
+        /// <summary>
+        /// This method clears the values from the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ClearForm()
         {
             this.HeightTextBox.Text = "0";
             this.WeightTextBox.Text = "0";
-
             this.HeightTextBox.Enabled = false;
             this.WeightTextBox.Enabled = false;
-
             this.BMITextBox.Text = "0";
             this.BMIResultsTextBox.Text = "BMI Result";
-
+            this.BMIResultsTextBox.ForeColor = Color.Gray;
+            this.BMIResultsTextBox.BackColor = Color.FromName("Control");
             this.BMIResultsProgressBar.Minimum = 0;
             this.BMIResultsProgressBar.Maximum = 100;
             this.BMIResultsProgressBar.Value = 0;
             this.BMIResultsProgressBar.BackColor = Color.WhiteSmoke;
         }
 
-        private double _weightInPounds = 0.0;
-        private double _heightInInches = 0.0;
-        private double _weightInKilograms = 0.0;
-        private double _heightInMeters = 0.0;
+        /// <summary>
+        /// This method resets the controls from the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetForm()
+        {
+            this.ImperialRadioButton.Checked = false;
+            this.MetricRadioButton.Checked = false;
+            this.CalculateBMIButton.Enabled = false;
+            this.ResetButton.Enabled = false;
+            this.ClearForm();
+            this.ApplicationMessage("Form has been reset.", "BMI Calculator");
+        }
 
         private void CalculateBMIButton_Click(object sender, EventArgs e)
         {
             this.CalculateBMIButton.Enabled = false;
             this.ResetButton.Enabled = true;
-
             if (this.ImperialRadioButton.Checked)
             {
-                this._weightInPounds = double.Parse(this.WeightTextBox.Text);
-                this._heightInInches = double.Parse(this.HeightTextBox.Text);
-
-                double _result = 0.0;
-                _result = (_weightInPounds * 703.0) / (_heightInInches * _heightInInches);
-
-                this.BMIResultsScale(_result);
-
-                this.BMITextBox.Text = _result.ToString("F");
+                this.CalculateBMI("Imperial", 
+                    double.Parse(this.WeightTextBox.Text),
+                    double.Parse(this.HeightTextBox.Text));
             }
             else if (this.MetricRadioButton.Checked)
             {
-                this._weightInKilograms = double.Parse(this.WeightTextBox.Text);
-                this._heightInMeters = double.Parse(this.HeightTextBox.Text);
+                this.CalculateBMI("Metric",
+                    double.Parse(this.WeightTextBox.Text),
+                    double.Parse(this.HeightTextBox.Text));
+            }
+        }
 
-                double _result = 0.0;
-                _result = _weightInKilograms / (_heightInMeters * _heightInMeters);
+        private double _weightInPounds;
+        private double _heightInInches;
+        private double _weightInKilograms;
+        private double _heightInMeters;
+        private double _result;
 
-                this.BMIResultsScale(_result);
+        /// <summary>
+        /// This method handles calculation of BMI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CalculateBMI(string mode, double weight, double height)
+        {
+            this._weightInPounds = 0.0;
+            this._heightInInches = 0.0;
+            this._weightInKilograms = 0.0;
+            this._heightInMeters = 0.0;
+            this._result = 0.0;
 
-                this.BMITextBox.Text = _result.ToString("F");
+            switch (mode)
+            {
+                case "Imperial":
+                    this._weightInPounds = weight;
+                    this._heightInInches = height;
+                    this._result = (_weightInPounds * 703.0) / (_heightInInches * _heightInInches);
+                    this.BMIResultsScale(this._result);
+                    this.BMITextBox.Text = this._result.ToString("F");
+                    break;
+                case "Metric":
+                    this._weightInKilograms = weight;
+                    this._heightInMeters = height;
+                    this._result = _weightInKilograms / (_heightInMeters * _heightInMeters);
+                    this.BMIResultsScale(this._result);
+                    this.BMITextBox.Text = this._result.ToString("F");
+                    break;
             }
         }
 
         private void BMIResultsScale(double _result)
         {
-            this.BMIResultsProgressBar.Minimum = 0;
-            this.BMIResultsProgressBar.Maximum = 100;
-
             if (_result < 18.5)
             {
                 this.BMIResultsTextBox.Text = "You are Underweight";
-                //yellow
-                this.BMIResultsProgressBar.BackColor = Color.Yellow;
-                this.BMIResultsProgressBar.Value = (int)_result;
+                this.BMIResultsTextBox.BackColor = Color.Yellow;
+                this.BMIResultsProgressBar.Value = 30;
             }
             else if ((_result >= 18.5) && (_result <= 24.9))
             {
                 this.BMIResultsTextBox.Text = "You are Normal";
-                //green
-                this.BMIResultsProgressBar.BackColor = Color.Green;
-                this.BMIResultsProgressBar.Value = (int)_result;
+                this.BMIResultsTextBox.ForeColor = Color.White;
+                this.BMIResultsTextBox.BackColor = Color.Green;
+                this.BMIResultsProgressBar.Value = 50;
             }
             else if ((_result >= 25) && (_result <= 29.9))
             {
                 this.BMIResultsTextBox.Text = "You are Overweight";
-                //orange
-                this.BMIResultsProgressBar.BackColor = Color.Orange;
-                this.BMIResultsProgressBar.Value = (int)_result;
+                this.BMIResultsTextBox.ForeColor = Color.White;
+                this.BMIResultsTextBox.BackColor = Color.Orange;
+                this.BMIResultsProgressBar.Value = 70;
             }
             else if (_result >= 30)
             {
                 this.BMIResultsTextBox.Text = "You are Obese";
-                //red
-                this.BMIResultsProgressBar.BackColor = Color.Red;
-                this.BMIResultsProgressBar.Value = (int)_result;
+                this.BMIResultsTextBox.ForeColor = Color.White;
+                this.BMIResultsTextBox.BackColor = Color.Red;
+                this.BMIResultsProgressBar.Value = 100;
             }
         }
 
-        private void BMICalculatorForm_Load(object sender, EventArgs e)
-        {
+        private void BMICalculatorForm_Load(object sender, EventArgs e) { }
 
-        }
-
+        /// <summary>
+        /// This method handles both ImperialRadioButton and MetricRadioButton checked change events
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BMICalculatorMode_CheckedChange(object sender, EventArgs e)
         {
             if (this.ImperialRadioButton.Checked)
@@ -162,17 +189,20 @@ namespace BMICalculator
                 this.ImperialRadioButton.Checked = false;
             }
 
-            this.CalculateBMIButton.Enabled = true;
+            this.CalculateBMIButton.Enabled = false;
             this.ClearForm();
             this.HeightTextBox.Enabled = true;
             this.WeightTextBox.Enabled = true;
-
-            this.HeightAndWeightTextBox_TextChanged(sender, e);
         }
 
-        private void HeightAndWeightTextBox_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// This method handles both HeightTextBox and WeightTextBox text changed events
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        private void HeightTextBox_TextChanged(object sender, EventArgs e)
         {
-            if ((this.HeightTextBox.Text == "0") && 
+            if ((this.HeightTextBox.Text == "0") || 
                 (this.WeightTextBox.Text == "0"))
             {
                 this.CalculateBMIButton.Enabled = false;
@@ -180,23 +210,58 @@ namespace BMICalculator
             }
             else
             {
-                if ((this.HeightTextBox.Text == "0") || 
-                    (this.WeightTextBox.Text == "0"))
-                {
-                    this.CalculateBMIButton.Enabled = false;
-                    this.ResetButton.Enabled = true;
-                }
-                else
-                {
-                    this.CalculateBMIButton.Enabled = true;
-                    this.ResetButton.Enabled = false;
-                }
+                this.CalculateBMIButton.Enabled = true;
+                this.ResetButton.Enabled = false;
+            }
+        }
+        private void WeightTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if ((this.WeightTextBox.Text == "0") || 
+                (this.HeightTextBox.Text == "0"))
+            {
+                this.CalculateBMIButton.Enabled = false;
+                this.ResetButton.Enabled = true;
+            }
+            else
+            {
+                this.CalculateBMIButton.Enabled = true;
+                this.ResetButton.Enabled = false;
             }
         }
 
         private void BMICalculatorForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        /// <summary>
+        /// This method handles both HeightTextBox and WeightTextBox key press events
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HeightTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar))
+            {
+                this.ApplicationMessage("Numeric values only for height.", "BMI Calculator");
+            }
+        }
+        private void WeightTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLetter(e.KeyChar))
+            {
+                this.ApplicationMessage("Numeric values only for weight.", "BMI Calculator");
+            }
+        }
+
+        /// <summary>
+        /// This method handles application message boxes
+        /// <param name="message"></param>
+        /// <param name="title"></param>
+        private void ApplicationMessage(string message, string title)
+        {
+            MessageBox.Show(message, title,
+                   MessageBoxButtons.OK,
+                   MessageBoxIcon.Information);
         }
     }
 }

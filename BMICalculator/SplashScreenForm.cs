@@ -20,9 +20,7 @@ namespace BMICalculator
         private void SplashScreenTimer_Tick(object sender, EventArgs e)
         {
             this.SplashScreenTimer.Enabled = false;
-
-            Program.bmiCalculatorForm = new BMICalculatorForm();
-            Program.bmiCalculatorForm.Show();
+            Program.Forms[FormName.BMICalculatorForm.ToString()].Show();
             this.Hide();
         }
 

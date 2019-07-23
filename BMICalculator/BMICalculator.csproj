@@ -52,6 +52,7 @@
     <Compile Include="BMICalculatorForm.Designer.cs">
       <DependentUpon>BMICalculatorForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormName.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreenForm.cs">
