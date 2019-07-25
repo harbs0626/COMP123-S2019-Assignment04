@@ -140,35 +140,45 @@ namespace BMICalculator
             }
         }
 
+        /// <summary>
+        /// This method handles both BMIResultsScaleChange and ProgressBarChange
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BMIResultsScale(double _result)
         {
             if (_result < 18.5)
             {
-                this.BMIResultsTextBox.Text = "You are Underweight";
-                this.BMIResultsTextBox.BackColor = Color.Yellow;
-                this.BMIResultsProgressBar.Value = 30;
+                this.BMIResultsScaleChange(ScaleMessage.Underweight.ToString(), "Black", "Yellow");
+                this.ProgressBarChange("Yellow", 30);
             }
             else if ((_result >= 18.5) && (_result <= 24.9))
             {
-                this.BMIResultsTextBox.Text = "You are Normal";
-                this.BMIResultsTextBox.ForeColor = Color.White;
-                this.BMIResultsTextBox.BackColor = Color.Green;
-                this.BMIResultsProgressBar.Value = 50;
+                this.BMIResultsScaleChange(ScaleMessage.Normal.ToString(), "White", "Green");
+                this.ProgressBarChange("Green", 50);
             }
             else if ((_result >= 25) && (_result <= 29.9))
             {
-                this.BMIResultsTextBox.Text = "You are Overweight";
-                this.BMIResultsTextBox.ForeColor = Color.White;
-                this.BMIResultsTextBox.BackColor = Color.Orange;
-                this.BMIResultsProgressBar.Value = 70;
+                this.BMIResultsScaleChange(ScaleMessage.Overweight.ToString(), "White", "Orange");
+                this.ProgressBarChange("Orange", 70);
             }
             else if (_result >= 30)
             {
-                this.BMIResultsTextBox.Text = "You are Obese";
-                this.BMIResultsTextBox.ForeColor = Color.White;
-                this.BMIResultsTextBox.BackColor = Color.Red;
-                this.BMIResultsProgressBar.Value = 100;
+                this.BMIResultsScaleChange(ScaleMessage.Obese.ToString(), "White", "Red");
+                this.ProgressBarChange("Red", 100);
             }
+        }
+        private void ProgressBarChange(string foreColorName, int value)
+        {
+            this.BMIResultsProgressBar.ForeColor = Color.FromName(foreColorName);
+            this.BMIResultsProgressBar.Value = value;
+        }
+        private void BMIResultsScaleChange(string message, 
+            string foreColorName, string backColorName)
+        {
+            this.BMIResultsTextBox.Text = "You are " + message;
+            this.BMIResultsTextBox.ForeColor = Color.FromName(foreColorName);
+            this.BMIResultsTextBox.BackColor = Color.FromName(backColorName);
         }
 
         private void BMICalculatorForm_Load(object sender, EventArgs e) { }
@@ -243,6 +253,7 @@ namespace BMICalculator
             if (char.IsLetter(e.KeyChar))
             {
                 this.ApplicationMessage("Numeric values only for height.", "BMI Calculator");
+                e.Handled = true;
             }
         }
         private void WeightTextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -250,6 +261,7 @@ namespace BMICalculator
             if (char.IsLetter(e.KeyChar))
             {
                 this.ApplicationMessage("Numeric values only for weight.", "BMI Calculator");
+                e.Handled = true;
             }
         }
 
@@ -262,6 +274,19 @@ namespace BMICalculator
             MessageBox.Show(message, title,
                    MessageBoxButtons.OK,
                    MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// This method handles both HeightTextBox and WeightTextBox click events
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HeightTextBox_Click(object sender, EventArgs e)
+        {
+            this.HeightTextBox.SelectAll();
+        }
+        private void WeightTextBox_Click(object sender, EventArgs e)
+        {
+            this.WeightTextBox.SelectAll();
         }
     }
 }
